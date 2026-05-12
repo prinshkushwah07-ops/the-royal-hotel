@@ -3,7 +3,7 @@ import Sidebar from "./components/Sidebar";
 import Dashboard from "./components/Dashboard";
 import RoomsBooking from "./components/RoomsBooking";
 import LandingPage from "./components/LandingPage";
-import UserHome from "./Components/Temp";
+import UserHome from "./Components/UserHome";
 
 function App() {
   const [activeTab, setActiveTab] = useState("home");
