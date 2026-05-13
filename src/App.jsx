@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Sidebar from "./components/Sidebar";
-import Dashboard from "./components/Dashboard";
-import RoomsBooking from "./components/RoomsBooking";
-import LandingPage from "./components/LandingPage";
+import Sidebar from "./Components/Sidebar";
+import Dashboard from "./Components/Dashboard";
+import RoomsBooking from "./Components/RoomsBooking";
+import LandingPage from "./Components/LandingPage";
 import UserHome from "./Components/UserHome";
 
 function App() {
