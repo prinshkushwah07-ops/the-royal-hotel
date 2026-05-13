@@ -1,110 +1,199 @@
-import React from "react";
+import React, { useState } from "react";
+import { X, Crown } from "lucide-react";
 
-const LandingPage = ({ setActiveTab }) => {
+function LandingPage({ setActiveTab }) {
+  // Modal control state
+  const [loginModal, setLoginModal] = useState({ isOpen: false, type: "" });
+
+  // Form Submit Handler
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (loginModal.type === "staff") {
+      setLoginModal({ isOpen: false, type: "" });
+      setActiveTab("dashboard");
+    } else {
+      setLoginModal({ isOpen: false, type: "" });
+      setActiveTab("user-home");
+    }
+  };
+
   return (
-    // BACKGROUND SECTION
-    <div 
-      className="min-h-screen bg-[#070b14] text-white flex flex-col font-sans relative overflow-x-hidden bg-cover bg-center bg-no-repeat"
-      style={{
-        // BHAISAAB YAHAN APNI ASLI BACKGROUND IMAGE KA PATH DAAL DIJIYEGA
-        backgroundImage: "url('background.png')" 
-      }}
-    >
-      
-      {/* Ek dark overlay taaki white text padhne mein aasaani ho */}
-      <div className="absolute inset-0 bg-black/40 z-0"></div>
+    <div className="relative w-full text-white font-sans overflow-x-hidden flex flex-col min-h-screen selection:bg-amber-500/30">
+      {/* BACKGROUND IMAGE */}
+      <div
+        className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/background.png')" }}
+      >
+        <div className="absolute inset-0 bg-black/40"></div>
+      </div>
 
-      {/* Main Content */}
-      <div className="relative z-10 flex flex-col min-h-screen">
+      {/* CONTENT WRAPPER */}
+      <div className="relative z-10 flex flex-col min-h-screen w-full">
         
-        {/* === HEADER SECTION === */}
-        <header className="flex flex-col items-center pt-8 px-4 w-full">
+        {/* HEADER SECTION - EXACTLY LIKE YOUR SCREENSHOT */}
+        <header className="w-full relative pt-6 pb-4 border-b border-white/20 z-50">
           
-          {/* Top Buttons (Staff & User Login) */}
-          <div className="flex flex-wrap justify-center gap-4 mb-6 w-full">
+          {/* Top Login Buttons - Absolute on Laptop (Top Right), Centered on Mobile */}
+          <div className="md:absolute md:top-8 md:right-10 flex justify-center gap-3 w-full md:w-auto mb-6 md:mb-0 px-4 md:px-0">
             <button
-              onClick={() => setActiveTab("dashboard")}
-              className="px-6 py-2 border border-white text-xs tracking-widest hover:bg-white hover:text-black transition-all"
+              onClick={() => setLoginModal({ isOpen: true, type: "staff" })}
+              className="text-white text-[10px] md:text-xs font-bold tracking-[0.1em] border border-white/60 px-5 py-2 hover:bg-white hover:text-black transition-all uppercase rounded-sm"
             >
-              STAFF LOGIN
+              Staff Login
             </button>
             <button
-              onClick={() => setActiveTab("user-home")}
-              className="px-6 py-2 border border-white text-xs tracking-widest hover:bg-white hover:text-black transition-all"
+              onClick={() => setLoginModal({ isOpen: true, type: "user" })}
+              className="text-white text-[10px] md:text-xs font-bold tracking-[0.1em] border border-white/60 px-5 py-2 hover:bg-white hover:text-black transition-all uppercase rounded-sm"
             >
-              USER LOGIN
+              User Login
             </button>
           </div>
 
-          {/* Logo Section */}
-          <div className="mb-6">
-            {/* APNA TRH WALA LOGO YAHAN DAALEIN */}
-            <img 
-              src='logo.png' 
-              alt="TRH Logo" 
-              className="h-20 w-auto object-contain" 
-            />
-          </div>
+          {/* Logo & Navigation - Centered */}
+          <div className="flex flex-col items-center w-full">
+            {/* Logo */}
+            <div className="mb-4">
+              <img
+                src="/logo.png"
+                alt="The Royal Logo"
+                className="h-16 md:h-20 object-contain"
+              />
+            </div>
 
-          {/* Navigation Links - (flex-wrap add kiya h mobile ke liye) */}
-          <nav className="flex flex-wrap justify-center gap-6 md:gap-10 text-xs tracking-[0.2em] font-semibold mt-2">
-            <button className="border-b-2 border-[#d4af37] pb-1 text-[#d4af37]">ROOMS</button>
-            <button className="pb-1 hover:text-[#d4af37] transition-colors">WELLNESS</button>
-            <button className="pb-1 hover:text-[#d4af37] transition-colors">GASTRO</button>
-            <button className="pb-1 hover:text-[#d4af37] transition-colors">RESORT</button>
-          </nav>
+            {/* Navigation */}
+            <nav className="flex justify-center items-center gap-5 md:gap-12 flex-wrap px-4 mt-2">
+              <button className="text-[#fbbf24] border-b-2 border-[#fbbf24] pb-1 text-[11px] md:text-sm font-bold tracking-[0.2em] uppercase transition-all">
+                ROOMS
+              </button>
+              <button className="text-white hover:text-[#fbbf24] text-[11px] md:text-sm font-bold tracking-[0.2em] uppercase transition-all">
+                WELLNESS
+              </button>
+              <button className="text-white hover:text-[#fbbf24] text-[11px] md:text-sm font-bold tracking-[0.2em] uppercase transition-all">
+                GASTRO
+              </button>
+              <button className="text-white hover:text-[#fbbf24] text-[11px] md:text-sm font-bold tracking-[0.2em] uppercase transition-all">
+                RESORT
+              </button>
+            </nav>
+          </div>
         </header>
 
-        {/* === MIDDLE HERO SECTION === */}
-        <main className="flex-1 flex flex-col items-center justify-center px-4 text-center mt-10 md:mt-0">
-          <h1 className="text-6xl md:text-8xl font-serif mb-6 leading-tight">
-            Wellness &<br />Spa
+        {/* HERO CONTENT */}
+        <main className="w-full flex-1 flex flex-col items-center justify-center text-center px-4 py-20 md:mt-[-50px]">
+          <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-serif font-light tracking-wider text-white mb-6 leading-tight drop-shadow-2xl">
+            Wellness & Spa
           </h1>
-          <p className="text-base md:text-lg tracking-widest mb-10 max-w-2xl mx-auto">
-            Extensive wellness. Thermal spring.<br />Team of therapists.
+          <p className="text-white text-sm md:text-lg font-medium tracking-[0.15em] max-w-3xl mx-auto mb-10 drop-shadow-lg px-2 opacity-95">
+            Extensive wellness. Thermal spring. Team of therapists.
           </p>
-          <button className="px-10 py-3 border border-white text-sm tracking-[0.2em] rounded-full hover:bg-white hover:text-black transition-all">
-            EXPLORE
+          <button className="bg-transparent border border-white text-white px-10 md:px-14 py-3 rounded-full text-xs font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-500 shadow-xl">
+            Explore
           </button>
         </main>
 
-        {/* === FOOTER SECTION === */}
-        {/* MOBILE KE LIYE FIX: flex-col md:flex-row lagaya hai taaki text pichke nahi */}
-        <footer className="w-full mt-auto bg-black/60 pt-16 pb-8 px-6 md:px-20 lg:px-40 backdrop-blur-sm">
-          
-          <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-12 md:gap-8 mb-12 text-center md:text-left">
+        {/* FOOTER SECTION - MOBILE RESPONSIVE */}
+        <footer className="w-full bg-[#0a0a0a]/90 backdrop-blur-sm border-t border-white/10 py-10 px-8 lg:px-16 mt-auto">
+          <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-start w-full gap-8 md:gap-0">
             
-            {/* Left Side: Brand */}
-            <div className="w-full md:w-1/2">
-              <h2 className="text-3xl font-serif text-[#d4af37] mb-4">The Royal Hotel</h2>
-              <p className="text-gray-300 text-sm md:text-base leading-relaxed max-w-sm mx-auto md:mx-0">
-                Experience ultimate relaxation and luxury. Your sanctuary for premium wellness, gastronomy, and unforgettable private events.
+            <div className="w-full md:w-1/2 md:pr-4 text-left">
+              <h3 className="font-serif text-[1.25rem] md:text-[1.5rem] text-[#fbbf24] mb-3 tracking-wide">
+                The Royal Hotel
+              </h3>
+              <p className="text-[#cbd5e1] text-[13px] md:text-[15px] leading-relaxed max-w-[350px] text-justify tracking-[0.5px]">
+                Experience ultimate relaxation and luxury. Your sanctuary for
+                premium wellness, gastronomy, and unforgettable private events.
               </p>
             </div>
 
-            {/* Right Side: Contact */}
-            <div className="w-full md:w-1/2 flex flex-col md:items-end">
-              <h2 className="text-xl font-serif text-white mb-4">Contact Us</h2>
-              <div className="text-gray-300 text-sm md:text-base space-y-2">
-                <p>123 Luxury Avenue, Paradise City</p>
-                <p>+91 98765 43210</p>
-                <p>reservations@theroyalhotel.com</p>
+            <div className="w-full md:w-1/2 flex justify-start md:justify-end text-left">
+              <div>
+                <h3 className="font-serif text-[1.15rem] md:text-[1.25rem] text-white font-bold mb-3 tracking-wide">
+                  Contact Us
+                </h3>
+                <p className="text-[#cbd5e1] text-[13px] md:text-[15px] leading-relaxed tracking-[0.5px]">
+                  123 Luxury Avenue, Paradise City
+                  <br />
+                  +91 98765 43210
+                  <br />
+                  reservations@theroyalhotel.com
+                </p>
               </div>
             </div>
 
           </div>
 
-          {/* Copyright Line */}
-          <div className="border-t border-white/20 pt-6 text-center">
-            <p className="text-xs text-gray-400 tracking-wider">
-              &copy; 2026 The Royal Hotel. All rights reserved.
+          <div className="max-w-5xl mx-auto text-center mt-8 pt-4 border-t border-[#333333]">
+            <p className="text-[#64748b] text-[11px] md:text-[13px]">
+              &copy; {new Date().getFullYear()} The Royal Hotel. All rights
+              reserved.
             </p>
           </div>
         </footer>
-
       </div>
+
+      {/* LOGIN MODAL (POPUP) */}
+      {loginModal.isOpen && (
+        <div className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-[#050505] border border-white/10 p-8 w-full max-w-md relative shadow-2xl">
+            <button
+              onClick={() => setLoginModal({ isOpen: false, type: "" })}
+              className="absolute top-4 right-4 text-white/50 hover:text-white transition-colors"
+            >
+              <X size={24} />
+            </button>
+
+            <div className="flex flex-col items-center mb-8">
+              <Crown
+                size={40}
+                className="text-[#fbbf24] mb-4"
+                strokeWidth={1.5}
+              />
+              <h2 className="text-2xl font-serif tracking-[0.1em] uppercase text-white">
+                {loginModal.type === "staff" ? "Staff Login" : "User Login"}
+              </h2>
+              <p className="text-[#94a3b8] text-xs tracking-widest uppercase mt-2">
+                Sign in to continue
+              </p>
+            </div>
+
+            <form onSubmit={handleLogin} className="flex flex-col gap-5">
+              <div>
+                <label className="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-2 block">
+                  Username or Email
+                </label>
+                <input
+                  type="text"
+                  defaultValue={
+                    loginModal.type === "staff" ? "admin_royal" : "guest_user"
+                  }
+                  className="w-full bg-[#111] border border-white/10 px-4 py-3 text-white text-sm focus:outline-none focus:border-[#fbbf24] transition-colors"
+                  required
+                />
+              </div>
+              <div>
+                <label className="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-2 block">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  defaultValue="••••••••"
+                  className="w-full bg-[#111] border border-white/10 px-4 py-3 text-white text-sm focus:outline-none focus:border-[#fbbf24] transition-colors"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-[#fbbf24] text-black font-bold tracking-[0.2em] uppercase py-3 mt-4 hover:bg-white transition-colors"
+              >
+                Login
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
-};
+}
 
 export default LandingPage;
