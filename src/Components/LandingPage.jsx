@@ -18,8 +18,8 @@ function LandingPage({ setActiveTab }) {
   };
 
   return (
-    <div className="relative w-full text-white font-sans overflow-x-hidden flex flex-col selection:bg-amber-500/30">
-      {/* BACKGROUND IMAGE */}
+    <div className="relative w-full text-white font-sans overflow-x-hidden flex flex-col min-h-screen selection:bg-amber-500/30">
+      {/* BACKGROUND IMAGE - Fixed behind all content */}
       <div
         className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/background.png')" }}
@@ -28,71 +28,81 @@ function LandingPage({ setActiveTab }) {
       </div>
 
       {/* CONTENT WRAPPER */}
-      <div className="relative z-10 flex flex-col w-full">
-        {/* === HEADER + HERO FULL SCREEN WRAPPER === */}
-        {/* Is div ki wajah se footer 100% neeche push ho jayega aur bina scroll ke nahi dikhega */}
-        <div className="min-h-screen flex flex-col w-full">
-          {/* HEADER SECTION */}
-          <header className="w-full relative pt-6 md:pt-6 pb-6 md:pb-4 border-b border-white/20 z-50 flex flex-col items-center">
-            {/* Logo */}
-            <div className="mb-4 mt-2 md:mt-0">
-              <img
-                src="/logo.png"
-                alt="The Royal Logo"
-                className="h-16 md:h-20 object-contain"
-              />
-            </div>
-
-            {/* Navigation */}
-            <nav className="flex justify-center items-center gap-5 md:gap-12 flex-wrap px-4 mt-2">
-              <button className="text-[#fbbf24] border-b-2 border-[#fbbf24] pb-1 text-[11px] md:text-sm font-bold tracking-[0.2em] uppercase transition-all">
-                ROOMS
-              </button>
-              <button className="text-white hover:text-[#fbbf24] text-[11px] md:text-sm font-bold tracking-[0.2em] uppercase transition-all">
-                WELLNESS
-              </button>
-              <button className="text-white hover:text-[#fbbf24] text-[11px] md:text-sm font-bold tracking-[0.2em] uppercase transition-all">
-                GASTRO
-              </button>
-              <button className="text-white hover:text-[#fbbf24] text-[11px] md:text-sm font-bold tracking-[0.2em] uppercase transition-all">
-                RESORT
-              </button>
-            </nav>
-
-            {/* Top Login Buttons */}
-            {/* Mobile: Nav ke neeche. Laptop: Absolute Top Right */}
-            <div className="md:absolute md:top-8 md:right-10 flex justify-center gap-3 mt-6 md:mt-0 w-full md:w-auto px-4 md:px-0">
-              <button
-                onClick={() => setLoginModal({ isOpen: true, type: "staff" })}
-                className="text-white text-[10px] md:text-xs font-bold tracking-[0.1em] border border-white/60 px-5 py-2 hover:bg-white hover:text-black transition-all uppercase rounded-sm"
-              >
-                Staff Login
-              </button>
-              <button
-                onClick={() => setLoginModal({ isOpen: true, type: "user" })}
-                className="text-white text-[10px] md:text-xs font-bold tracking-[0.1em] border border-white/60 px-5 py-2 hover:bg-white hover:text-black transition-all uppercase rounded-sm"
-              >
-                User Login
-              </button>
-            </div>
-          </header>
-
-          {/* HERO CONTENT */}
-          <main className="w-full flex-1 flex flex-col items-center justify-center text-center px-4 py-10 md:py-20 md:mt-[-50px]">
-            <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-serif font-light tracking-wider text-white mb-6 leading-tight drop-shadow-2xl">
-              Wellness & Spa
-            </h1>
-            <p className="text-white text-sm md:text-lg font-medium tracking-[0.15em] max-w-3xl mx-auto mb-10 drop-shadow-lg px-2 opacity-95">
-              Extensive wellness. Thermal spring. Team of therapists.
-            </p>
-            <button className="bg-transparent border border-white text-white px-10 md:px-14 py-3 rounded-full text-xs font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-500 shadow-xl">
-              Explore
+      <div className="relative z-10 flex flex-col min-h-screen w-full">
+        {/* HEADER SECTION */}
+        <header className="w-full relative flex flex-col items-center pt-5 pb-4 border-b border-white/20 z-50">
+          {/* DESKTOP LOGIN BUTTONS - Absolute Top Right (Sirf Laptop par dikhenge) */}
+          <div className="hidden md:flex absolute top-8 right-10 flex-row gap-3 z-50">
+            <button
+              onClick={() => setLoginModal({ isOpen: true, type: "staff" })}
+              className="text-white text-xs font-bold tracking-[0.1em] border border-white/60 px-5 py-2 hover:bg-white hover:text-black transition-all uppercase rounded-sm"
+            >
+              Staff Login
             </button>
-          </main>
-        </div>
+            <button
+              onClick={() => setLoginModal({ isOpen: true, type: "user" })}
+              className="text-white text-xs font-bold tracking-[0.1em] border border-white/60 px-5 py-2 hover:bg-white hover:text-black transition-all uppercase rounded-sm"
+            >
+              User Login
+            </button>
+          </div>
 
-        {/* === FOOTER SECTION === */}
-        {/* Ab ye footer sirf scroll karne par hi aayega */}
+          {/* Logo */}
+          <div className="mb-4 mt-2">
+            <img
+              src="/logo.png"
+              alt="The Royal Logo"
+              className="h-16 md:h-20 object-contain"
+            />
+          </div>
+
+          {/* Navigation */}
+          <nav className="flex justify-center items-center gap-5 md:gap-12 flex-wrap px-4 mt-2">
+            <button className="text-[#fbbf24] border-b-2 border-[#fbbf24] pb-1 text-[11px] md:text-sm font-bold tracking-[0.2em] uppercase transition-all">
+              ROOMS
+            </button>
+            <button className="text-white hover:text-[#fbbf24] text-[11px] md:text-sm font-bold tracking-[0.2em] uppercase transition-all">
+              WELLNESS
+            </button>
+            <button className="text-white hover:text-[#fbbf24] text-[11px] md:text-sm font-bold tracking-[0.2em] uppercase transition-all">
+              GASTRO
+            </button>
+            <button className="text-white hover:text-[#fbbf24] text-[11px] md:text-sm font-bold tracking-[0.2em] uppercase transition-all">
+              RESORT
+            </button>
+          </nav>
+
+          {/* MOBILE LOGIN BUTTONS - Navigation ke neeche (Sirf Phone par dikhenge) */}
+          <div className="flex md:hidden justify-center gap-3 w-full mt-6 px-4">
+            <button
+              onClick={() => setLoginModal({ isOpen: true, type: "staff" })}
+              className="text-white text-[10px] font-bold tracking-[0.1em] border border-white/60 px-4 py-2 hover:bg-white hover:text-black transition-all uppercase rounded-sm"
+            >
+              Staff Login
+            </button>
+            <button
+              onClick={() => setLoginModal({ isOpen: true, type: "user" })}
+              className="text-white text-[10px] font-bold tracking-[0.1em] border border-white/60 px-4 py-2 hover:bg-white hover:text-black transition-all uppercase rounded-sm"
+            >
+              User Login
+            </button>
+          </div>
+        </header>
+
+        {/* HERO CONTENT */}
+        <main className="w-full flex-1 flex flex-col items-center justify-center text-center px-4 py-20">
+          <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-serif font-light tracking-wider text-white mb-6 leading-tight drop-shadow-2xl">
+            Wellness & Spa
+          </h1>
+          <p className="text-white text-sm md:text-lg font-medium tracking-[0.15em] max-w-3xl mx-auto mb-10 drop-shadow-lg px-2 opacity-95">
+            Extensive wellness. Thermal spring. Team of therapists.
+          </p>
+          <button className="bg-transparent border border-white text-white px-10 md:px-14 py-3 rounded-full text-xs font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-500 shadow-xl">
+            Explore
+          </button>
+        </main>
+
+        {/* FOOTER SECTION */}
         <footer className="w-full bg-[#0a0a0a]/90 backdrop-blur-sm border-t border-white/10 py-10 px-8 lg:px-16 mt-auto">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-start w-full gap-8 md:gap-0">
             <div className="w-full md:w-1/2 md:pr-4 text-left">
