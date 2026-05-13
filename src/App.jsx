@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// Dhyan dijiye: Yahan sabhi imports mein 'C' capital kar diya gaya hai
 import Sidebar from "./Components/Sidebar";
 import Dashboard from "./Components/Dashboard";
 import RoomsBooking from "./Components/RoomsBooking";
@@ -24,11 +25,11 @@ function App() {
     switch (activeTab) {
       case "home":
         return <LandingPage setActiveTab={handleNavigation} />;
-      
+
       // Admin (Staff) Views
       case "dashboard":
         return <Dashboard setIsMobileOpen={setIsMobileOpen} />;
-      case "room-booking": // Sidebar se linked ID
+      case "room-booking":
         return <RoomsBooking setIsMobileOpen={setIsMobileOpen} />;
 
       // User (Guest) View
@@ -40,12 +41,14 @@ function App() {
     }
   };
 
+  // Agar 'home' tab active hai, toh sirf Landing Page dikhayenge (bina sidebar ke)
   if (activeTab === "home") {
     return <LandingPage setActiveTab={handleNavigation} />;
   }
 
   return (
-    <div className="flex h-screen bg-[#070b14] overflow-hidden">
+    // 'relative' aur 'w-full' add kiya hai taaki mobile par sidebar overlap theek se kaam kare
+    <div className="flex h-screen bg-[#070b14] overflow-hidden relative w-full">
       <Sidebar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -53,7 +56,9 @@ function App() {
         setIsMobileOpen={setIsMobileOpen}
         userRole={userRole}
       />
-      <div className="flex-1 flex flex-col h-full overflow-hidden">
+
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col h-full overflow-hidden w-full relative z-0">
         {renderContent()}
       </div>
     </div>
